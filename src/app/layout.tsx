@@ -59,7 +59,6 @@ const structuredData = {
   description:
     "Local taxi, airport transfer and outstation cab service with transparent pricing and 24/7 support.",
   url: SITE_URL,
-  telephone: CONTACT.phoneDisplay,
   email: CONTACT.email,
   address: {
     "@type": "PostalAddress",

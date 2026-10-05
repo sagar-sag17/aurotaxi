@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import ContactForm from "@/components/contact/ContactForm";
 import Button from "@/components/ui/Button";
-import { PhoneIcon, MailIcon, PinIcon, ClockIcon } from "@/components/ui/icons";
+import { MailIcon, PinIcon, ClockIcon } from "@/components/ui/icons";
 import { CONTACT, buildWhatsAppLink } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 };
 
 const INFO_ITEMS = [
-  { icon: PhoneIcon, label: "Phone", value: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
   { icon: MailIcon, label: "Email", value: CONTACT.email, href: `mailto:${CONTACT.email}` },
   { icon: PinIcon, label: "Address", value: CONTACT.address },
   { icon: ClockIcon, label: "Operating Hours", value: CONTACT.hours },

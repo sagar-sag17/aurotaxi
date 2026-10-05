@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
@@ -39,13 +38,10 @@ export default function ReviewsTeaser() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="flex justify-center">
           <Button href="/reviews" variant="primary">
             Read All Reviews
           </Button>
-          <Link href="/reviews#share" className="text-sm font-semibold text-brand-orange hover:text-brand-orange-dark">
-            Share Your Experience →
-          </Link>
         </div>
       </Container>
     </section>
