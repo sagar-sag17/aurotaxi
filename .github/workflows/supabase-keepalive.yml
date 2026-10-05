@@ -13,10 +13,25 @@ jobs:
     steps:
       - name: Ping Supabase REST API
         run: |
-          curl --fail --silent --show-error \
-            "${SUPABASE_URL}/rest/v1/reviews?select=id&limit=1" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}"
+          url="$(printf '%s' "$SUPABASE_URL" | tr -d '[:space:]')"
+          key="$(printf '%s' "$SUPABASE_ANON_KEY" | tr -d '[:space:]')"
+
+          if [ -z "$url" ] || [ -z "$key" ]; then
+            echo "SUPABASE_URL or SUPABASE_ANON_KEY secret is missing/empty." >&2
+            exit 1
+          fi
+
+          http_code=$(curl --silent --show-error --output response.txt --write-out "%{http_code}" \
+            "${url}/rest/v1/reviews?select=id&limit=1" \
+            -H "apikey: ${key}" \
+            -H "Authorization: Bearer ${key}")
+
+          echo "HTTP status: ${http_code}"
+          cat response.txt
+
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            exit 1
+          fi
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
