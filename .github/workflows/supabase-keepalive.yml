@@ -2,9 +2,10 @@ name: Supabase Keep-Alive
 
 on:
   schedule:
-    # Mon & Thu 06:00 UTC — comfortably inside Supabase's free-tier
-    # 7-day inactivity pause window.
-    - cron: "0 6 * * 1,4"
+    # Daily at 06:00 UTC. Supabase free-tier projects pause after 7 days
+    # of inactivity — daily pings leave a wide safety margin so a single
+    # failed run can't let the project drift into a pause unnoticed.
+    - cron: "0 6 * * *"
   workflow_dispatch: {}
 
 jobs:
